@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "Bash(python3 -c \"from app.config import config; print\\('OK:', config.app_name, config.llm_model, config.allowed_extensions_list\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/config.py'\\).read\\(\\)\\); print\\('config.py syntax OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('.env'\\).read\\(\\)\\); print\\('.env readable'\\)\")",
+      "Bash(python3 -c \"from app.models.request import ChatRequest, DocumentQuery; from app.models.response import ChatResponse, Source; from app.models.document import DocumentInfo, IngestResult; print\\('All models OK'\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import ast; [ast.parse\\(open\\(f\\).read\\(\\)\\) for f in ['app/agent/state.py','app/agent/utils.py','app/agent/__init__.py']]; print\\('All syntax OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/planner.py'\\).read\\(\\)\\); print\\('planner.py OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/executor.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/replanner.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/optical_agent.py'\\).read\\(\\)\\); print\\('OK'\\)\")"
     ]
   }
 }
