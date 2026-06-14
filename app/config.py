@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     # 应用
     app_name: str = "OpticalRAG"
-    app_version: str = "2.0.0"
+    app_version: str = "2.1.0"
     debug: bool = False
     host: str = "0.0.0.0"
     port: int = 9900
