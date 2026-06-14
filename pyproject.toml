@@ -1,7 +1,7 @@
 [project]
-name = "optical-rag-assistant"
+name = "optirag"
 version = "2.1.0"
-description = "光学科研RAG助手 - 多模态文档问答系统"
+description = "OptiRAG - 光学科研多模态文档问答与实验方案设计"
 authors = [{name = "chief"}]
 readme = "README.md"
 requires-python = ">=3.11,<3.14"

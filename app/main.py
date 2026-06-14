@@ -1,4 +1,4 @@
-"""FastAPI 应用入口 — 光学科研 RAG 助手"""
+"""FastAPI 应用入口 — OptiRAG"""
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -30,7 +30,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=config.app_name,
     version=config.app_version,
-    description="光学科研 RAG 助手 — 多模态文档问答与实验方案设计",
+    description="OptiRAG — 光学科研多模态文档问答与实验方案设计",
     lifespan=lifespan,
 )
 

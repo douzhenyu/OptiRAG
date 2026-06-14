@@ -1,4 +1,4 @@
-"""配置管理模块 — 光学科研 RAG 助手"""
+"""配置管理模块 — OptiRAG"""
 
 from typing import Any
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     )
 
     # 应用
-    app_name: str = "OpticalRAG"
+    app_name: str = "OptiRAG"
     app_version: str = "2.1.0"
     debug: bool = False
     host: str = "0.0.0.0"

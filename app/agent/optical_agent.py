@@ -18,7 +18,7 @@ NODE_REPLANNER = "replanner"
 
 
 class OpticalAgent:
-    """光学科研助手 Agent — 知识问答 + 实验方案设计"""
+    """OptiRAG Agent — 知识问答 + 实验方案设计"""
 
     def __init__(self):
         db_dir = Path(config.sqlite_db_path).parent
@@ -72,7 +72,7 @@ class OpticalAgent:
             messages=[
                 {
                     "role": "system",
-                    "content": "你是一位光学科研助手。请基于提供的参考资料回答问题。如果资料不足以回答，诚实说明。引用来源时标注文档名称。用 Markdown 格式输出。",
+                    "content": "你是一位光学科研助手 OptiRAG。请基于提供的参考资料回答问题。如果资料不足以回答，诚实说明。引用来源时标注文档名称。用 Markdown 格式输出。",
                 },
                 {
                     "role": "user",
