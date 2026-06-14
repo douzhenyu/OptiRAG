@@ -1,8 +1,5 @@
-"""SuperBizAgent Python 版本
+"""光学科研 RAG 助手 — 多模态文档问答与实验方案设计"""
 
-基于 LangChain 的智能业务代理系统
-"""
+__version__ = "2.0.0"
 
-__version__ = "1.0.0"
-
-from app.utils import logger  # noqa: F401
+from app.utils.logger import logger  # noqa: F401
