@@ -1,38 +1,37 @@
-"""响应数据模型
-
-定义 API 响应的 Pydantic 模型
-"""
+"""响应数据模型"""
 
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional
+from datetime import datetime
+from typing import Any
+
+
+class Source(BaseModel):
+    """引用来源"""
+    document_name: str
+    content_snippet: str
+    page: int | None = None
+    relevance: float
+
+
+class ToolCall(BaseModel):
+    """工具调用记录"""
+    tool: str
+    status: str  # "start" | "end" | "error"
+    input: dict[str, Any] | None = None
+    output: str | None = None
 
 
 class ChatResponse(BaseModel):
     """对话响应"""
-
-    answer: str = Field(..., description="AI 回答")
-    session_id: str = Field(..., description="会话 ID")
-
-
-class SessionInfoResponse(BaseModel):
-    """会话信息响应"""
-
-    session_id: str = Field(..., description="会话 ID")
-    message_count: int = Field(..., description="消息数量")
-    history: List[Dict[str, str]] = Field(..., description="历史消息列表")
+    session_id: str
+    answer: str
+    sources: list[Source] = []
+    tool_calls: list[ToolCall] | None = None
 
 
-class ApiResponse(BaseModel):
-    """通用 API 响应"""
-
-    status: str = Field(..., description="状态")
-    message: str = Field(..., description="消息")
-    data: Optional[Any] = Field(None, description="数据")
-
-
-class HealthResponse(BaseModel):
-    """健康检查响应"""
-
-    status: str = Field(..., description="状态")
-    service: str = Field(..., description="服务名称")
-    version: str = Field(..., description="版本号")
+class SessionInfo(BaseModel):
+    """会话信息"""
+    session_id: str
+    message_count: int
+    created_at: datetime
+    updated_at: datetime
