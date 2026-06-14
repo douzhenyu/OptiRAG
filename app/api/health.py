@@ -12,7 +12,7 @@ router = APIRouter()
 @router.get("/health")
 async def health_check():
     """检查服务状态和知识库"""
-    doc_count = len(rag_engine.list_documents(page_size=1)[0])
+    _, doc_count = rag_engine.list_documents(page_size=1)
     status_code = 200 if doc_count >= 0 else 503
 
     return JSONResponse(

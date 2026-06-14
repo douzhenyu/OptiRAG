@@ -1,5 +1,6 @@
 """Agent 工具集 — 检索 + 规格查询 + 设备对比"""
 
+import asyncio
 from langchain_core.tools import tool
 from loguru import logger
 from app.engine.rag_engine import rag_engine
@@ -16,7 +17,7 @@ def retrieve_knowledge(query: str) -> str:
         格式化的检索结果文本
     """
     try:
-        results = rag_engine.query(query)
+        results = asyncio.run(rag_engine.query(query))
         if not results:
             return "未在知识库中找到相关信息。"
 
@@ -55,7 +56,7 @@ def search_specs(device_name: str, param: str | None = None) -> str:
         query_text += f" {param}"
 
     try:
-        results = rag_engine.query(query_text, top_k=3)
+        results = asyncio.run(rag_engine.query(query_text, top_k=3))
         if not results:
             return f"未找到 '{device_name}' 的规格信息。"
 
@@ -85,8 +86,8 @@ def compare_devices(device_a: str, device_b: str, aspect: str | None = None) -> 
         query_text += f" 在 {aspect} 方面"
 
     try:
-        a_results = rag_engine.query(f"{device_a} 规格参数", top_k=2)
-        b_results = rag_engine.query(f"{device_b} 规格参数", top_k=2)
+        a_results = asyncio.run(rag_engine.query(f"{device_a} 规格参数", top_k=2))
+        b_results = asyncio.run(rag_engine.query(f"{device_b} 规格参数", top_k=2))
 
         parts = [f"## {device_a} vs {device_b}"]
         if aspect:
