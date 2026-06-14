@@ -45,6 +45,9 @@ class Settings(BaseSettings):
     max_file_size_mb: int = 50
     upload_dir: str = "./uploads"
 
+    # 会话持久化
+    sqlite_db_path: str = "./data/optical_rag.db"
+
     # MCP 扩展（可选）
     mcp_servers_config: str = "{}"
 

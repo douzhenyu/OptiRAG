@@ -1,10 +1,12 @@
 """OpticalAgent — Plan-Execute-Replan 工作流编排"""
 
 from typing import AsyncGenerator, Any
+from pathlib import Path
 from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
 from loguru import logger
 
+from app.config import config
 from app.agent.state import PlanExecuteState
 from app.agent.planner import planner
 from app.agent.executor import executor
@@ -19,9 +21,11 @@ class OpticalAgent:
     """光学科研助手 Agent — 知识问答 + 实验方案设计"""
 
     def __init__(self):
-        self.checkpointer = MemorySaver()
+        db_dir = Path(config.sqlite_db_path).parent
+        db_dir.mkdir(parents=True, exist_ok=True)
+        self.checkpointer = SqliteSaver.from_conn_string(config.sqlite_db_path)
         self.graph = self._build_graph()
-        logger.info("OpticalAgent (Plan-Execute-Replan) 初始化完成")
+        logger.info(f"OpticalAgent (Plan-Execute-Replan) 初始化完成, db={config.sqlite_db_path}")
 
     def _build_graph(self):
         """构建工作流图"""

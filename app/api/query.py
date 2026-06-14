@@ -55,14 +55,43 @@ async def chat_stream(request: ChatRequest):
 
 @router.get("/chat/session/{session_id}")
 async def get_session(session_id: str):
-    """获取会话详情"""
-    return {
-        "session_id": session_id,
-        "message": "会话历史由 checkpointer 管理，暂不暴露完整历史",
-    }
+    """获取会话历史"""
+    try:
+        config_dict = {"configurable": {"thread_id": session_id}}
+        state = optical_agent.graph.get_state(config_dict)
+        if state is None or state.values is None:
+            return {"session_id": session_id, "history": [], "message": "会话不存在或已过期"}
+
+        past_steps = state.values.get("past_steps", [])
+        response = state.values.get("response", "")
+        history = [
+            {"step": step, "result": result[:300]}
+            for step, result in past_steps
+        ]
+        return {
+            "session_id": session_id,
+            "history": history,
+            "has_response": bool(response),
+            "step_count": len(past_steps),
+        }
+    except Exception as e:
+        logger.error(f"获取会话失败: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.delete("/chat/session/{session_id}")
 async def clear_session(session_id: str):
     """清空会话"""
-    return {"status": "ok", "session_id": session_id}
+    try:
+        config_dict = {"configurable": {"thread_id": session_id}}
+        # SqliteSaver 通过删除 thread 对应的 checkpoint 来清空
+        # 生成一个新的空状态来覆盖
+        optical_agent.graph.update_state(
+            config_dict,
+            {"input": "", "plan": [], "past_steps": [], "response": ""},
+        )
+        logger.info(f"会话已清空: {session_id}")
+        return {"status": "cleared", "session_id": session_id}
+    except Exception as e:
+        logger.error(f"清空会话失败: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
