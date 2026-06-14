@@ -35,10 +35,11 @@ class Settings(BaseSettings):
     milvus_timeout: int = 30000  # 毫秒
     milvus_db_name: str = "optical_rag"
 
-    # RAG
+    # RAG — LightRAG 分块与检索
+    chunk_size: int = 1200            # LightRAG 读取 CHUNK_SIZE 环境变量
+    chunk_overlap_size: int = 100     # LightRAG 读取 CHUNK_OVERLAP_SIZE
+    embedding_batch_num: int = 20     # Embedding 批处理大小
     rag_top_k: int = 5
-    chunk_max_size: int = 800
-    chunk_overlap: int = 100
 
     # RAG-Anything 引擎
     ra_parser: str = "mineru"        # 解析引擎: "mineru" | "docling" | "paddleocr"
