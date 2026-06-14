@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     # Milvus
     milvus_host: str = "localhost"
     milvus_port: int = 19530
+    milvus_timeout: int = 30000  # 毫秒
     milvus_db_name: str = "optical_rag"
 
     # RAG
