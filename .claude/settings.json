@@ -12,7 +12,10 @@
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/planner.py'\\).read\\(\\)\\); print\\('planner.py OK'\\)\")",
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/executor.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/replanner.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
-      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/optical_agent.py'\\).read\\(\\)\\); print\\('OK'\\)\")"
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/optical_agent.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python3 -c \"import raganything; help\\(raganything.RAGAnything.__init__\\)\")",
+      "WebFetch(domain:pypi.org)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/engine/rag_engine.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")"
     ]
   }
 }

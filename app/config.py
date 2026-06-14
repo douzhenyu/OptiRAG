@@ -40,6 +40,16 @@ class Settings(BaseSettings):
     chunk_max_size: int = 800
     chunk_overlap: int = 100
 
+    # RAG-Anything 引擎
+    ra_parser: str = "mineru"        # 解析引擎: "mineru" | "docling" | "paddleocr"
+    ra_parse_method: str = "auto"    # 解析方式: "auto" | "ocr" | "txt"
+    ra_device: str = "cpu"           # 推理设备: "cpu" | "cuda" | "mps"
+    ra_lang: str = ""                # 文档语言: ""(自动) | "ch" | "en"
+    ra_query_mode: str = "hybrid"    # 查询模式: "hybrid" | "local" | "global" | "naive"
+    ra_enable_images: bool = True    # 图片理解（光路图、光谱图）
+    ra_enable_tables: bool = True    # 表格理解（规格参数表）
+    ra_enable_formulas: bool = True  # 公式理解（光学公式）
+
     # 文档处理
     allowed_extensions: str = "pdf,docx,xlsx,pptx,txt,md,png,jpg,jpeg"
     max_file_size_mb: int = 50

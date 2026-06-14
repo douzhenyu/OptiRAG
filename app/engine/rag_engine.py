@@ -152,11 +152,11 @@ class RAGEngine:
 
             ra_config = RAGAnythingConfig(
                 working_dir=config.upload_dir,
-                parser="mineru",
-                parse_method="auto",
-                enable_image_processing=True,
-                enable_table_processing=True,
-                enable_equation_processing=True,
+                parser=config.ra_parser,
+                parse_method=config.ra_parse_method,
+                enable_image_processing=config.ra_enable_images,
+                enable_table_processing=config.ra_enable_tables,
+                enable_equation_processing=config.ra_enable_formulas,
             )
 
             self._raganything = RAGAnything(
@@ -256,11 +256,12 @@ class RAGEngine:
                 result = await self._raganything.process_document_complete(
                     file_path=str(file_path),
                     output_dir=str(Path(config.upload_dir) / ".parsed"),
-                    parse_method="auto",
-                    parser="mineru",
-                    device="cpu",
-                    formula=True,
-                    table=True,
+                    parse_method=config.ra_parse_method,
+                    parser=config.ra_parser,
+                    device=config.ra_device,
+                    lang=config.ra_lang or None,
+                    formula=config.ra_enable_formulas,
+                    table=config.ra_enable_tables,
                 )
                 chunks = getattr(result, "chunks_count", 0)
                 tables = getattr(result, "tables_count", 0)
@@ -327,7 +328,7 @@ class RAGEngine:
             try:
                 result = await self._raganything.aquery(
                     query=question,
-                    mode="hybrid",
+                    mode=config.ra_query_mode,
                 )
                 # aquery 返回结构: {"response": "...", "references": [...]}
                 references = result.get("references", []) if isinstance(result, dict) else []
