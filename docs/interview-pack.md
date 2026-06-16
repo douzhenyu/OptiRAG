@@ -5,6 +5,14 @@
 
 ---
 
+## 📋 项目简介
+
+> **OptiRAG** 是一个面向光学科研场景的多模态 RAG Agent 系统，支持 PDF/Word/图片等多格式文档的自动解析与知识图谱构建，通过 Plan-Execute-Replan Agent 实现从简单规格查找到复杂实验方案设计的全链路智能问答。
+
+> **核心技术栈**：Python · FastAPI · LangGraph · RAG-Anything (LightRAG + MinerU 2.0) · Milvus · DashScope (Qwen-Max / Qwen-VL) · SQLite · SSE · Claude Code
+
+---
+
 ## 📄 STAR 简历项目
 
 > **OptiRAG — 基于 Plan-Execute-Replan 的多模态 RAG Agent 系统**
