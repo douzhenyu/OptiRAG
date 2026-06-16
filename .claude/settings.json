@@ -15,7 +15,11 @@
       "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/agent/optical_agent.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
       "Bash(python3 -c \"import raganything; help\\(raganything.RAGAnything.__init__\\)\")",
       "WebFetch(domain:pypi.org)",
-      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/engine/rag_engine.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")"
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app/engine/rag_engine.py'\\).read\\(\\)\\); print\\('Syntax OK'\\)\")",
+      "Bash(git remote *)",
+      "Bash(pip install *)",
+      "Bash(python3 -m pip install loguru pydantic pydantic-settings fastapi openai python-dotenv)",
+      "Bash(python3 -c \"import loguru\")"
     ]
   }
 }
